@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+<h2>Welcome, {{ user.username }}</h2>
+
+
+
+<h1 style="color: rgb(4, 239, 8);">Your Orders</h1>
+{% if orders %}
+<table class="table table-striped mt-4">
+    <thead>
+        <tr>
+            <th>Course</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Payment Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.course.name }}</td>
+            <td>{{ order.amount }}</td>
+            <td>{{ order.date }}</td>
+            <td>{{ order.payment_status|yesno:"Paid,Pending" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h1 style="color: red;">You have not Registered any course</h1>
+{% endif %}
+
+
+
+
+
+
+<h1 style="color: rgb(215, 9, 9);">The avilable course</h1>
+<table class="table table-striped mt-4" border="2px solid black">
+    <thead>
+        <tr>
+            <th>Course Name</th>
+            <th>Description</th>
+            <!-- <th>Actions</th> -->
+             <th>Instructor </th>
+             <th>Fees</th>
+             <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% if courses %}
+        {% if courses|length == 1 %}
+        <!-- Single Course Object -->
+        <tr>
+            <td>{{ courses.name }}</td>
+            <td>{{ courses.description }}</td>
+            <td>Instructor: {{ courses.instructor }}</td>
+            <td>{{ courses.fees }}</td>
+            <td>
+                <form action="{% url 'order_course' course_id=course.pk %}">
+                    <button class="btn btn-primary" type="submit">Order</button>
+                </form>            </td>
+        </tr>
+        {% else %}
+        <!-- Multiple Course Objects -->
+       
+            {% for course in courses %}
+            <tr>
+            <td>{{ course.name }}</td>
+            <td>{{ course.description }}</td>
+            <td>Instructor: {{ course.faculty }}</td>
+            <td>{{ course.fees }}</td>
+            <td>
+                <form action="{% url 'order_course' course_id=course.pk %}">
+                    <button class="btn btn-primary" type="submit">Order</button>
+                </form>
+            </td>
+
+        </tr>
+            {% endfor %}
+       
+        {% endif %}
+        {% else %}
+        <h1 style="color: red;">{{ message }}</h1>
+        {% endif %}
+    </tbody>
+</table>
+
+
+
+
+
+
+{% endblock %}

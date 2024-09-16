@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}Faculty Dashboard{% endblock %}
+
+{% block content %}
+<h2>Welcome, {{ user.username }}</h2>
+<p class="lead">Your Courses:</p>
+<p>
+    <form action="{% url 'add_courses' %}">
+        <button class="btn btn-primary">Add Course</button>
+
+    </form>
+</p>
+<table class="table table-striped mt-4" border="2px solid black">
+    <thead>
+        <tr>
+            <th>Course Name</th>
+            <th>Description</th>
+            <!-- <th>Actions</th> -->
+             <th>Instructor </th>
+             <th>Fees</th>
+             <td>Action</td>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% if courses %}
+       
+        <!-- Single Course Object -->
+        <tr>
+            {% if courses|length == 1 %}
+            {% for course in courses %}
+            <td>{{ course.name }}</td>
+            <td>{{ course.description }}</td>
+            <td>Instructor: {{ course.faculty }}</td>
+            <td>{{ course.fees }}</td>
+
+            <td>
+                <form action="{% url 'delete_course' course_id=course.pk faculty=course.faculty %}">
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                </form>
+
+           </td>
+
+           <td>
+            <form action="{% url 'edit_course' course_id=course.pk  %}">
+                <button class="btn btn-primary" type="submit">Edit</button>
+            </form>
+
+       </td>
+
+
+
+            <td><button> <a href="{% url 'edit_course' course_id=course.pk %}">Edit </a> </button></td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            {% for course in courses %}
+           <tr>
+            <td>{{ course.name }}</td>
+            <td>{{ course.description }}</td>
+            <td>Instructor: {{ course.faculty }}</td>
+            <td>{{ course.fees }}</td>
+            <td>
+                <form action="{% url 'delete_course' course_id=course.pk faculty=course.faculty %}">
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                </form>
+
+           </td>
+
+           <td>
+            <form action="{% url 'edit_course' course_id=course.pk  %}">
+                <button class="btn btn-primary" type="submit">Edit</button>
+            </form>
+           </td>
+            {% endfor %}
+            </tr>
+        {% endif %}
+        {% else %}
+        <h1 style="color: red;">{{ message }}</h1>
+        {% endif %}
+    </tbody>
+</table>
+{% endblock %}

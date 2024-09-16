@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+
+<!-- 
+
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to the Learning Platform</h1>
+    <p class="lead">This is an online learning platform where students can enroll in courses and faculty can upload educational content.</p>
+    <hr class="my-4">
+    <p>New here? Register now!</p>
+    <a class="btn btn-primary btn-lg" href="{% url 'student_register' %}" role="button">Student Register</a>
+    <a class="btn btn-secondary btn-lg" href="{% url 'faculty_register' %}" role="button">Faculty Register</a>
+</div>
+ -->
+
+
+
+<div class="text-center mb-5">
+    <h1 class="display-4">Welcome to the Learning Platform</h1>
+    <p class="lead">An online learning space for students to enroll in courses and faculty to upload educational content.</p>
+</div>
+
+<div class="row">
+    <div class="col-lg-6 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-body text-center">
+                <h5 class="card-title">New Student?</h5>
+                <p class="card-text">Register as a student and start exploring various courses today!</p>
+                <a href="{% url 'student_register' %}" class="btn btn-primary btn-lg">Student Register</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-body text-center">
+                <h5 class="card-title">Are You Faculty?</h5>
+                <p class="card-text">Register as a faculty member and share your knowledge by uploading course content!</p>
+                <a href="{% url 'faculty_register' %}" class="btn btn-secondary btn-lg">Faculty Register</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-5">
+    <a href="{% url 'login' %}" class="btn btn-outline-dark btn-lg">Already have an account? Login</a>
+</div>
+{% endblock %}
