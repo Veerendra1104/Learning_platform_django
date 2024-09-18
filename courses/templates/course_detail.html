@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Course Details - {{ course.name }}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h3>{{ course.name }}</h3>
+                </div>
+                <div class="card-body">
+                    <p><strong>Description:</strong></p>
+                    <p>{{ course.description }}</p>
+
+                    <p><strong>Faculty:</strong> {{ course.faculty }}</p>
+
+                    <p><strong>Fees:</strong> ₹{{ course.fees }}</p>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{% if user.is_student %}{% url 'student_dashboard' name=user.username %}{% elif user.is_faculty %}{% url 'faculty_dashboard' name=user.username %}{% endif %}" class="btn btn-secondary">Back to course</a>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

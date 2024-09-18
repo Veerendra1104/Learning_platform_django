@@ -30,7 +30,7 @@
         <tr>
             {% if courses|length == 1 %}
             {% for course in courses %}
-            <td>{{ course.name }}</td>
+            <td> <a href="{% url 'detail_view' course_id=course.pk  %}"> {{ course.name }}</a></td>
             <td>{{ course.description }}</td>
             <td>Instructor: {{ course.faculty }}</td>
             <td>{{ course.fees }}</td>
@@ -57,7 +57,7 @@
             {% else %}
             {% for course in courses %}
            <tr>
-            <td>{{ course.name }}</td>
+            <td> <a href="{% url 'detail_view' course_id=course.pk  %}"> {{ course.name }}</a></td>
             <td>{{ course.description }}</td>
             <td>Instructor: {{ course.faculty }}</td>
             <td>{{ course.fees }}</td>

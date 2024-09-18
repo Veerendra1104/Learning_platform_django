@@ -227,5 +227,8 @@ def edit_course(request, course_id):
         form = add_courses_form()
         return render(request, 'edit_course.html', {'form': form , 'course' : course})
         
+def detail_view(request, course_id):
+    course = Course.objects.get(id = course_id)
+    return render(request, 'course_detail.html', {'course': course})
 
     

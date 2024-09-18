@@ -21,6 +21,8 @@
     <tbody>
         {% for order in orders %}
         <tr>
+            <td> <a href="{% url 'detail_view' course_id=order.course.pk  %}"> {{ order.course.name }}</a></td>
+
             <td>{{ order.course.name }}</td>
             <td>{{ order.amount }}</td>
             <td>{{ order.date }}</td>
@@ -56,7 +58,7 @@
         {% if courses|length == 1 %}
         <!-- Single Course Object -->
         <tr>
-            <td>{{ courses.name }}</td>
+            <td> <a href="{% url 'detail_view' course_id=course.pk  %}"> {{ course.name }}</a></td>
             <td>{{ courses.description }}</td>
             <td>Instructor: {{ courses.instructor }}</td>
             <td>{{ courses.fees }}</td>
@@ -70,7 +72,7 @@
        
             {% for course in courses %}
             <tr>
-            <td>{{ course.name }}</td>
+            <td> <a href="{% url 'detail_view' course_id=course.pk  %}"> {{ course.name }}</a></td>
             <td>{{ course.description }}</td>
             <td>Instructor: {{ course.faculty }}</td>
             <td>{{ course.fees }}</td>
